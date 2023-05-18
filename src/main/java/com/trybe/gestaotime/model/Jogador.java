@@ -32,11 +32,6 @@ public class Jogador {
    * Métodos.
    * 
    */
-  public Jogador() {
-    super();
-    this.documento = new Documento();
-    this.time = new Time();
-  }
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "documento_id")
