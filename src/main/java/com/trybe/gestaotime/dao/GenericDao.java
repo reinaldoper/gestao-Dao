@@ -2,6 +2,7 @@ package com.trybe.gestaotime.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -16,15 +17,46 @@ public abstract class GenericDao<T, I extends Serializable> {
    **/
   EntityManagerFactory emf = Persistence.createEntityManagerFactory("crudHibernatePU");
 
-  abstract void salvar(T s);
+  /**
+   * Atributos.
+   **/
 
-  abstract void editar(T s);
+  public void salvar(T s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
+
+  /**
+   * Atributos.
+   * 
+   **/
+  public void editar(T s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.merge(s);
+    em.getTransaction().commit();
+
+    em.close();
+  }
 
   abstract void deletar(Long id);
 
   abstract List<T> listar();
-
-  abstract T findById(I id);
   /**
    * Métodos.
    **/
