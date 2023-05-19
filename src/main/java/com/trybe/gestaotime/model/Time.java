@@ -27,13 +27,12 @@ public class Time {
 
   private String nome;
 
-  @OneToMany(mappedBy = "time", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "time", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Jogador> jogadores;
 
   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  @JoinTable(name = "relacionamento_time_torcedor",
-      joinColumns = {@JoinColumn(name = "torcedor_id")},
-      inverseJoinColumns = {@JoinColumn(name = "time_id")})
+  @JoinTable(name = "times_jogadores", joinColumns = {@JoinColumn(name = "time_id")},
+      inverseJoinColumns = {@JoinColumn(name = "torcedor_id")})
   private List<Torcedor> torcedores;
 
   public String getNome() {

@@ -33,6 +33,8 @@ public class Jogador {
    * 
    */
 
+
+
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "documento_id")
   private Documento documento;

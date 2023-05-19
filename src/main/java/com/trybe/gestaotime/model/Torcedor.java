@@ -1,6 +1,6 @@
 package com.trybe.gestaotime.model;
 
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +24,7 @@ public class Torcedor {
   private String nome;
 
   @ManyToMany(mappedBy = "torcedores")
-  private Set<Time> times;
+  private List<Time> times;
 
   public String getNome() {
     return nome;

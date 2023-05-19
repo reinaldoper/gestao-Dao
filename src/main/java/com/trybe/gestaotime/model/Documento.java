@@ -1,12 +1,9 @@
 package com.trybe.gestaotime.model;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 /**
  * Classe Documento.
@@ -31,9 +28,6 @@ public class Documento {
    * Métodos.
    * 
    */
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "jogador_id")
-  private Jogador jogador;
 
   public long getId() {
     return id;

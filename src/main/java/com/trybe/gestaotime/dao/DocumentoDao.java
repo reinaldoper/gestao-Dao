@@ -13,6 +13,20 @@ public class DocumentoDao extends GenericDao<Documento, Integer> {
   /**
    * Metodo main.
    */
+  @Override
+  public void salvar(Documento s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
 
   @Override
   public List<Documento> listar() {
