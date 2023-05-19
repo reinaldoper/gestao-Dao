@@ -48,6 +48,13 @@ public class DocumentoDao extends GenericDao<Documento, Integer> {
     em.getTransaction().begin();
     em.remove(toBeDeleted);
     em.getTransaction().commit();
+    em.close();
+  }
+
+  @Override
+  public Documento findById(Long id) {
+    EntityManager em = emf.createEntityManager();
+    return em.find(Documento.class, id);
   }
 
 }

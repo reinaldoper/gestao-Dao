@@ -32,6 +32,13 @@ public class TorcedorDao extends GenericDao<Torcedor, Integer> {
     em.getTransaction().begin();
     em.remove(toBeDeleted);
     em.getTransaction().commit();
+    em.close();
+  }
+
+  @Override
+  public Torcedor findById(Long id) {
+    EntityManager em = emf.createEntityManager();
+    return em.find(Torcedor.class, id);
   }
 
 }

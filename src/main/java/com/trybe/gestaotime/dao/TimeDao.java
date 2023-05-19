@@ -40,4 +40,10 @@ public class TimeDao extends GenericDao<Time, Integer> {
     em.close();
   }
 
+  @Override
+  public Time findById(Long id) {
+    EntityManager em = emf.createEntityManager();
+    return em.find(Time.class, id);
+  }
+
 }

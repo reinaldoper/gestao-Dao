@@ -39,4 +39,10 @@ public class JogadorDao extends GenericDao<Jogador, Integer> {
     em.close();
   }
 
+  @Override
+  public Jogador findById(Long id) {
+    EntityManager em = emf.createEntityManager();
+    return em.find(Jogador.class, id);
+  }
+
 }

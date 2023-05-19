@@ -57,6 +57,9 @@ public abstract class GenericDao<T, I extends Serializable> {
   abstract void deletar(Long id);
 
   abstract List<T> listar();
+
+  abstract T findById(Long id);
+
   /**
    * Métodos.
    **/
