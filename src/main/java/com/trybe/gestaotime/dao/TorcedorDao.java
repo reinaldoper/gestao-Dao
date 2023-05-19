@@ -8,10 +8,39 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class TorcedorDao extends GenericDao<Torcedor, Integer> {
+public class TorcedorDao extends GenericDao<Torcedor, Long> {
   /**
    * Metodo main.
    */
+  @Override
+  public void salvar(Torcedor s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
+
+  @Override
+  public void editar(Torcedor s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.merge(s);
+    em.getTransaction().commit();
+  }
+
   @Override
   public List<Torcedor> listar() {
     EntityManager em = emf.createEntityManager();
@@ -21,7 +50,10 @@ public class TorcedorDao extends GenericDao<Torcedor, Integer> {
     CriteriaQuery<Torcedor> all = cq.select(rootEntry);
 
     TypedQuery<Torcedor> allQuery = em.createQuery(all);
-    return allQuery.getResultList();
+    List<Torcedor> listar = allQuery.getResultList();
+    em.close();
+
+    return listar;
   }
 
   @Override
@@ -38,7 +70,9 @@ public class TorcedorDao extends GenericDao<Torcedor, Integer> {
   @Override
   public Torcedor findById(Long id) {
     EntityManager em = emf.createEntityManager();
-    return em.find(Torcedor.class, id);
+    Torcedor fans = em.find(Torcedor.class, id);
+    em.close();
+    return fans;
   }
 
 }

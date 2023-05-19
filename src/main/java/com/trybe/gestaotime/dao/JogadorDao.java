@@ -8,11 +8,41 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class JogadorDao extends GenericDao<Jogador, Integer> {
+public class JogadorDao extends GenericDao<Jogador, Long> {
 
   /**
    * Metodo main.
    */
+
+  @Override
+  public void salvar(Jogador s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
+
+  @Override
+  public void editar(Jogador s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.merge(s);
+    em.getTransaction().commit();
+  }
+
   @Override
   public List<Jogador> listar() {
     EntityManager em = emf.createEntityManager();
@@ -21,9 +51,11 @@ public class JogadorDao extends GenericDao<Jogador, Integer> {
     CriteriaQuery<Jogador> cq = cb.createQuery(Jogador.class);
     Root<Jogador> rootEntry = cq.from(Jogador.class);
     CriteriaQuery<Jogador> all = cq.select(rootEntry);
-
     TypedQuery<Jogador> allQuery = em.createQuery(all);
-    return allQuery.getResultList();
+    List<Jogador> listar = allQuery.getResultList();
+    em.close();
+
+    return listar;
   }
 
   @Override
@@ -42,7 +74,9 @@ public class JogadorDao extends GenericDao<Jogador, Integer> {
   @Override
   public Jogador findById(Long id) {
     EntityManager em = emf.createEntityManager();
-    return em.find(Jogador.class, id);
+    Jogador jog = em.find(Jogador.class, id);
+    em.close();
+    return jog;
   }
 
 }

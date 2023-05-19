@@ -8,11 +8,40 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class TimeDao extends GenericDao<Time, Integer> {
+public class TimeDao extends GenericDao<Time, Long> {
 
   /**
    * Metodo main.
    */
+
+  @Override
+  public void salvar(Time s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
+
+  @Override
+  public void editar(Time s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.merge(s);
+    em.getTransaction().commit();
+  }
 
   @Override
   public List<Time> listar() {
@@ -24,7 +53,10 @@ public class TimeDao extends GenericDao<Time, Integer> {
     CriteriaQuery<Time> all = cq.select(rootEntry);
 
     TypedQuery<Time> allQuery = em.createQuery(all);
-    return allQuery.getResultList();
+    List<Time> listar = allQuery.getResultList();
+    em.close();
+
+    return listar;
   }
 
   @Override
@@ -43,7 +75,9 @@ public class TimeDao extends GenericDao<Time, Integer> {
   @Override
   public Time findById(Long id) {
     EntityManager em = emf.createEntityManager();
-    return em.find(Time.class, id);
+    Time time = em.find(Time.class, id);
+    em.close();
+    return time;
   }
 
 }

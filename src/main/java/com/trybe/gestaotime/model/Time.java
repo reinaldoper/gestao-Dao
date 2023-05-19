@@ -1,5 +1,6 @@
 package com.trybe.gestaotime.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,9 +32,18 @@ public class Time {
   private List<Jogador> jogadores;
 
   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  @JoinTable(name = "times_jogadores", joinColumns = {@JoinColumn(name = "time_id")},
+  @JoinTable(name = "relacionamento_times_jogadores", joinColumns = {@JoinColumn(name = "time_id")},
       inverseJoinColumns = {@JoinColumn(name = "torcedor_id")})
   private List<Torcedor> torcedores;
+
+  /**
+   * Classe Time.
+   **/
+  public Time() {
+    super();
+    this.jogadores = new ArrayList<Jogador>();
+    this.torcedores = new ArrayList<Torcedor>();
+  }
 
   public String getNome() {
     return nome;
@@ -43,19 +53,31 @@ public class Time {
     this.nome = nome;
   }
 
+  /**
+   * Classe Time.
+   **/
   public void setJogadores(List<Jogador> jogador) {
-    this.jogadores = jogador;
+    this.jogadores.clear();
+    for (Jogador jogadors : jogadores) {
+      this.jogadores.add(jogadors);
+    }
   }
 
+  /**
+   * Classe Time.
+   **/
   public void setTorcedores(List<Torcedor> torcedor) {
-    this.torcedores = torcedor;
+    this.torcedores.clear();
+    for (Torcedor torcedors : torcedores) {
+      this.torcedores.add(torcedors);
+    }
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class DocumentoDao extends GenericDao<Documento, Integer> {
+public class DocumentoDao extends GenericDao<Documento, Long> {
 
   /**
    * Metodo main.
@@ -29,6 +29,20 @@ public class DocumentoDao extends GenericDao<Documento, Integer> {
   }
 
   @Override
+  public void editar(Documento s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     * 
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.merge(s);
+    em.getTransaction().commit();
+  }
+
+  @Override
   public List<Documento> listar() {
     EntityManager em = emf.createEntityManager();
     CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -37,7 +51,10 @@ public class DocumentoDao extends GenericDao<Documento, Integer> {
     CriteriaQuery<Documento> all = cq.select(rootEntry);
 
     TypedQuery<Documento> allQuery = em.createQuery(all);
-    return allQuery.getResultList();
+    List<Documento> listar = allQuery.getResultList();
+    em.close();
+
+    return listar;
   }
 
   @Override
@@ -54,7 +71,9 @@ public class DocumentoDao extends GenericDao<Documento, Integer> {
   @Override
   public Documento findById(Long id) {
     EntityManager em = emf.createEntityManager();
-    return em.find(Documento.class, id);
+    Documento doc = em.find(Documento.class, id);
+    em.close();
+    return doc;
   }
 
 }
