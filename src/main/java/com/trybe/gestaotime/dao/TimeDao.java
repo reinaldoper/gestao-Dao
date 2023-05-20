@@ -8,26 +8,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class TimeDao extends GenericDao<Time, Long> {
+public class TimeDao extends GenericDao<Time, Integer> {
 
   /**
    * Metodo main.
    */
 
-  @Override
-  public void salvar(Time s) {
-    /**
-     * Updates an instance of type T into the database.
-     *
-     * 
-     */
-    EntityManager em = emf.createEntityManager();
-
-    em.getTransaction().begin();
-    em.persist(s);
-    em.getTransaction().commit();
-    em.close();
-  }
+  
 
   @Override
   public void editar(Time s) {
@@ -41,6 +28,7 @@ public class TimeDao extends GenericDao<Time, Long> {
     em.getTransaction().begin();
     em.merge(s);
     em.getTransaction().commit();
+    em.close();
   }
 
   @Override

@@ -8,26 +8,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class JogadorDao extends GenericDao<Jogador, Long> {
+public class JogadorDao extends GenericDao<Jogador, Integer> {
 
   /**
    * Metodo main.
    */
-
-  @Override
-  public void salvar(Jogador s) {
-    /**
-     * Updates an instance of type T into the database.
-     *
-     * 
-     */
-    EntityManager em = emf.createEntityManager();
-
-    em.getTransaction().begin();
-    em.persist(s);
-    em.getTransaction().commit();
-    em.close();
-  }
 
   @Override
   public void editar(Jogador s) {
@@ -41,6 +26,7 @@ public class JogadorDao extends GenericDao<Jogador, Long> {
     em.getTransaction().begin();
     em.merge(s);
     em.getTransaction().commit();
+    em.close();
   }
 
   @Override

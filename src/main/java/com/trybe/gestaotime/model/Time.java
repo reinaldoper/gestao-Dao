@@ -41,8 +41,9 @@ public class Time {
    **/
   public Time() {
     super();
-    this.jogadores = new ArrayList<Jogador>();
     this.torcedores = new ArrayList<Torcedor>();
+    this.jogadores = new ArrayList<Jogador>();
+
   }
 
   public String getNome() {
@@ -56,21 +57,35 @@ public class Time {
   /**
    * Classe Time.
    **/
-  public void setJogadores(List<Jogador> jogador) {
+  public void setJogadores(List<Jogador> jogadores) {
     this.jogadores.clear();
-    for (Jogador jogadors : jogadores) {
-      this.jogadores.add(jogadors);
+    for (Jogador jogador : jogadores) {
+      this.addJogadores(jogador);
     }
   }
 
   /**
    * Classe Time.
    **/
-  public void setTorcedores(List<Torcedor> torcedor) {
+  public void addJogadores(Jogador jogador) {
+    this.jogadores.add(jogador);
+  }
+
+  /**
+   * Classe Time.
+   **/
+  public void setTorcedores(List<Torcedor> torcedores) {
     this.torcedores.clear();
-    for (Torcedor torcedors : torcedores) {
-      this.torcedores.add(torcedors);
+    for (Torcedor torcedor : torcedores) {
+      this.addTorcedores(torcedor);
     }
+  }
+
+  /**
+   * Classe Time.
+   **/
+  public void addTorcedores(Torcedor torcedor) {
+    this.torcedores.add(torcedor);
   }
 
   public Long getId() {
@@ -82,11 +97,11 @@ public class Time {
   }
 
   public List<Torcedor> getTorcedores() {
-    return torcedores;
+    return this.torcedores;
   }
 
   public List<Jogador> getJogadores() {
-    return jogadores;
+    return this.jogadores;
   }
 
   /**

@@ -24,10 +24,12 @@ public class Documento {
 
   private String cbf;
 
+
   /**
    * Métodos.
    * 
    */
+
 
 
   public Long getId() {

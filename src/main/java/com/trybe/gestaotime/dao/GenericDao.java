@@ -2,6 +2,7 @@ package com.trybe.gestaotime.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -18,9 +19,21 @@ public abstract class GenericDao<T, I extends Serializable> {
 
   /**
    * Atributos.
+   * 
    **/
 
-  abstract void salvar(T s);
+  public void salvar(T s) {
+    /**
+     * Updates an instance of type T into the database.
+     *
+     */
+    EntityManager em = emf.createEntityManager();
+
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
 
   /**
    * Atributos.

@@ -26,6 +26,11 @@ public class Torcedor {
   @ManyToMany(mappedBy = "torcedores")
   private List<Time> times;
 
+  /**
+   * Atributos.
+   **/
+
+
   public String getNome() {
     return nome;
   }

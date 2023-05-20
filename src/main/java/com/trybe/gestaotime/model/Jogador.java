@@ -36,12 +36,17 @@ public class Jogador {
 
 
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "documento_id")
   private Documento documento;
 
   @ManyToOne
   @JoinColumn(name = "time_id")
   private Time time;
+
+  /**
+   * Métodos.
+   * 
+   */
+
 
   public String getNome() {
     return nome;
@@ -67,11 +72,11 @@ public class Jogador {
     this.documento = documento;
   }
 
-  public Long getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 

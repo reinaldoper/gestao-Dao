@@ -8,25 +8,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class DocumentoDao extends GenericDao<Documento, Long> {
+public class DocumentoDao extends GenericDao<Documento, Integer> {
 
   /**
    * Metodo main.
    */
-  @Override
-  public void salvar(Documento s) {
-    /**
-     * Updates an instance of type T into the database.
-     *
-     * 
-     */
-    EntityManager em = emf.createEntityManager();
-
-    em.getTransaction().begin();
-    em.persist(s);
-    em.getTransaction().commit();
-    em.close();
-  }
 
   @Override
   public void editar(Documento s) {
@@ -40,6 +26,7 @@ public class DocumentoDao extends GenericDao<Documento, Long> {
     em.getTransaction().begin();
     em.merge(s);
     em.getTransaction().commit();
+    em.close();
   }
 
   @Override
