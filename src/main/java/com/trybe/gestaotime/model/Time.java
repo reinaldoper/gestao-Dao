@@ -58,28 +58,30 @@ public class Time {
    * Classe Time.
    **/
   public void setJogadores(List<Jogador> jogadores) {
-    this.addJogadores(jogadores);
+    this.jogadores.clear();
+    this.jogadores.addAll(jogadores);
   }
 
   /**
    * Classe Time.
    **/
-  public void addJogadores(List<Jogador> jogador) {
-    this.jogadores.addAll(jogador);
+  public void addJogadores(Jogador jogador) {
+    this.jogadores.add(jogador);
   }
 
   /**
    * Classe Time.
    **/
   public void setTorcedores(List<Torcedor> torcedores) {
-    this.addTorcedores(torcedores);
+    this.torcedores.clear();
+    this.torcedores.addAll(torcedores);
   }
 
   /**
    * Classe Time.
    **/
-  public void addTorcedores(List<Torcedor> torcedor) {
-    this.torcedores.addAll(torcedor);
+  public void addTorcedores(Torcedor torcedor) {
+    this.torcedores.add(torcedor);
   }
 
   public long getId() {
