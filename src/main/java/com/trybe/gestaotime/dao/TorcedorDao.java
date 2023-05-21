@@ -12,55 +12,39 @@ public class TorcedorDao extends GenericDao<Torcedor, Integer> {
   /**
    * Metodo main.
    */
- 
 
-  @Override
-  public void editar(Torcedor s) {
-    /**
-     * Updates an instance of type T into the database.
-     *
-     * 
-     */
-    EntityManager em = emf.createEntityManager();
-
-    em.getTransaction().begin();
-    em.merge(s);
-    em.getTransaction().commit();
-    em.close();
-  }
+  EntityManager em = emf.createEntityManager();
 
   @Override
   public List<Torcedor> listar() {
-    EntityManager em = emf.createEntityManager();
     CriteriaBuilder cb = em.getCriteriaBuilder();
     CriteriaQuery<Torcedor> cq = cb.createQuery(Torcedor.class);
     Root<Torcedor> rootEntry = cq.from(Torcedor.class);
     CriteriaQuery<Torcedor> all = cq.select(rootEntry);
-
     TypedQuery<Torcedor> allQuery = em.createQuery(all);
-    List<Torcedor> listar = allQuery.getResultList();
-    em.close();
-
-    return listar;
+    return allQuery.getResultList();
   }
+  /**
+   * Metodo main.
+   */
 
   @Override
   public void deletar(Long id) {
-    EntityManager em = emf.createEntityManager();
     Torcedor toBeDeleted = em.find(Torcedor.class, id);
-
     em.getTransaction().begin();
     em.remove(toBeDeleted);
     em.getTransaction().commit();
-    em.close();
   }
+  /**
+   * Metodo main.
+   */
 
   @Override
   public Torcedor findById(Long id) {
     EntityManager em = emf.createEntityManager();
-    Torcedor fans = em.find(Torcedor.class, id);
+    Torcedor doc = em.find(Torcedor.class, id);
     em.close();
-    return fans;
+    return doc;
   }
 
 }

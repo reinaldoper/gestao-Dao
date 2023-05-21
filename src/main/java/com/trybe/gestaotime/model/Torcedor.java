@@ -1,5 +1,6 @@
 package com.trybe.gestaotime.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,10 @@ public class Torcedor {
   /**
    * Atributos.
    **/
-
+  public Torcedor() {
+    super();
+    this.times = new ArrayList<Time>();
+  }
 
   public String getNome() {
     return nome;
@@ -45,6 +49,14 @@ public class Torcedor {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public List<Time> getTimes() {
+    return times;
+  }
+
+  public void setTimes(List<Time> times) {
+    this.times = times;
   }
 
   /**

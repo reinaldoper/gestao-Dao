@@ -13,47 +13,31 @@ public class DocumentoDao extends GenericDao<Documento, Integer> {
   /**
    * Metodo main.
    */
-
-  @Override
-  public void editar(Documento s) {
-    /**
-     * Updates an instance of type T into the database.
-     *
-     * 
-     */
-    EntityManager em = emf.createEntityManager();
-
-    em.getTransaction().begin();
-    em.merge(s);
-    em.getTransaction().commit();
-    em.close();
-  }
+  EntityManager em = emf.createEntityManager();
 
   @Override
   public List<Documento> listar() {
-    EntityManager em = emf.createEntityManager();
     CriteriaBuilder cb = em.getCriteriaBuilder();
     CriteriaQuery<Documento> cq = cb.createQuery(Documento.class);
     Root<Documento> rootEntry = cq.from(Documento.class);
     CriteriaQuery<Documento> all = cq.select(rootEntry);
-
     TypedQuery<Documento> allQuery = em.createQuery(all);
-    List<Documento> listar = allQuery.getResultList();
-    em.close();
-
-    return listar;
+    return allQuery.getResultList();
   }
+  /**
+   * Metodo main.
+   */
 
   @Override
   public void deletar(Long id) {
-    EntityManager em = emf.createEntityManager();
     Documento toBeDeleted = em.find(Documento.class, id);
-
     em.getTransaction().begin();
     em.remove(toBeDeleted);
     em.getTransaction().commit();
-    em.close();
   }
+  /**
+   * Metodo main.
+   */
 
   @Override
   public Documento findById(Long id) {
