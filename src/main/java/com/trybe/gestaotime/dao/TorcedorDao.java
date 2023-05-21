@@ -8,12 +8,29 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class TorcedorDao extends GenericDao<Torcedor, Integer> {
+public class TorcedorDao extends GenericDao<Torcedor, Long> {
   /**
    * Metodo main.
    */
 
   EntityManager em = emf.createEntityManager();
+
+  /**
+   * Metodo main.
+   */
+
+  @Override
+  public void salvar(Torcedor s) {
+    /**
+     * Atributos.
+     * 
+     **/
+    EntityManager em = this.emf.createEntityManager();
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
 
   @Override
   public List<Torcedor> listar() {

@@ -56,7 +56,8 @@ public class Torcedor {
   }
 
   public void setTimes(List<Time> times) {
-    this.times.addAll(times);
+    this.times.clear();
+    this.times = times;
   }
 
   /**

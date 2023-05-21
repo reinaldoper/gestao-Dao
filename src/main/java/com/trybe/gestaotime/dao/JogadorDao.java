@@ -8,12 +8,29 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class JogadorDao extends GenericDao<Jogador, Integer> {
+public class JogadorDao extends GenericDao<Jogador, Long> {
 
   /**
    * Metodo main.
    */
   EntityManager em = emf.createEntityManager();
+
+  /**
+   * Metodo main.
+   */
+
+  @Override
+  public void salvar(Jogador s) {
+    /**
+     * Atributos.
+     * 
+     **/
+    EntityManager em = this.emf.createEntityManager();
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
 
   @Override
   public List<Jogador> listar() {
@@ -40,10 +57,6 @@ public class JogadorDao extends GenericDao<Jogador, Integer> {
   /**
    * Metodo main.
    */
-  public Jogador buscarPorId(Long id) {
-    return em.find(Jogador.class, id);
-  }
-
   @Override
   public Jogador findById(Long id) {
     EntityManager em = emf.createEntityManager();
@@ -51,5 +64,6 @@ public class JogadorDao extends GenericDao<Jogador, Integer> {
     em.close();
     return doc;
   }
+
 
 }

@@ -21,29 +21,23 @@ public abstract class GenericDao<T, I extends Serializable> {
    * Atributos.
    * 
    **/
-  public void salvar(T s) {
-    /**
-     * Atributos.
-     * 
-     **/
-    EntityManager em = this.emf.createEntityManager();
-    em.getTransaction().begin();
-    em.persist(s);
-    em.getTransaction().commit();
-    em.close();
-  }
 
   /**
    * Atributos.
    * 
    **/
 
+  public abstract void salvar(T s);
+
+  /**
+   * Métodos.
+   **/
   public void editar(T s) {
     /**
      * Atributos.
      * 
      **/
-    EntityManager em = emf.createEntityManager();
+    EntityManager em = this.emf.createEntityManager();
     em.getTransaction().begin();
     em.merge(s);
     em.getTransaction().commit();

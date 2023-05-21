@@ -31,20 +31,21 @@ public class Time {
   @OneToMany(mappedBy = "time", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Jogador> jogadores;
 
-  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  @JoinTable(name = "relacionamento_times_jogadores", joinColumns = {@JoinColumn(name = "time_id")},
-      inverseJoinColumns = {@JoinColumn(name = "torcedor_id")})
+  @ManyToMany
+  @JoinTable(name = "time_torcedor", joinColumns = @JoinColumn(name = "time_id"),
+      inverseJoinColumns = @JoinColumn(name = "torcedor_id"))
   private List<Torcedor> torcedores;
 
   /**
    * Classe Time.
    **/
+
   public Time() {
     super();
-    this.torcedores = new ArrayList<Torcedor>();
     this.jogadores = new ArrayList<Jogador>();
-
+    this.torcedores = new ArrayList<Torcedor>();
   }
+
 
   public String getNome() {
     return nome;
@@ -59,7 +60,9 @@ public class Time {
    **/
   public void setJogadores(List<Jogador> jogadores) {
     this.jogadores.clear();
-    this.jogadores.addAll(jogadores);
+    for (Jogador jogador : jogadores) {
+      this.addJogadores(jogador);
+    }
   }
 
   /**
@@ -73,7 +76,7 @@ public class Time {
    * Classe Time.
    **/
   public void setTorcedores(List<Torcedor> torcedores) {
-    this.torcedores.clear();
+
     this.torcedores.addAll(torcedores);
   }
 

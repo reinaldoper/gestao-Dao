@@ -8,12 +8,28 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class DocumentoDao extends GenericDao<Documento, Integer> {
+public class DocumentoDao extends GenericDao<Documento, Long> {
 
   /**
    * Metodo main.
    */
   EntityManager em = emf.createEntityManager();
+
+  /**
+   * Metodo main.
+   */
+  @Override
+  public void salvar(Documento s) {
+    /**
+     * Atributos.
+     * 
+     **/
+    EntityManager em = this.emf.createEntityManager();
+    em.getTransaction().begin();
+    em.persist(s);
+    em.getTransaction().commit();
+    em.close();
+  }
 
   @Override
   public List<Documento> listar() {
