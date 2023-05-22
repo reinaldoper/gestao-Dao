@@ -3,7 +3,6 @@ package com.trybe.gestaotime.dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
@@ -15,7 +14,8 @@ public abstract class GenericDao<T, I extends Serializable> {
   /**
    * Atributos.
    **/
-  EntityManagerFactory emf = Persistence.createEntityManagerFactory("crudHibernatePU");
+  public static final EntityManager em =
+      Persistence.createEntityManagerFactory("crudHibernatePU").createEntityManager();
 
   /**
    * Atributos.
@@ -26,34 +26,33 @@ public abstract class GenericDao<T, I extends Serializable> {
    * Atributos.
    * 
    **/
-
-  public abstract void salvar(T s);
+  public void salvar(T entity) {
+    em.getTransaction().begin();
+    em.persist(entity);
+    em.getTransaction().commit();
+  }
 
   /**
    * Métodos.
    **/
-  public void editar(T s) {
-    /**
-     * Atributos.
-     * 
-     **/
-    EntityManager em = this.emf.createEntityManager();
+  public void editar(T entity) {
     em.getTransaction().begin();
-    em.merge(s);
+    em.merge(entity);
     em.getTransaction().commit();
-    em.close();
   }
-
-  public abstract List<T> listar();
+  /**
+   * Métodos.
+   **/
 
   public abstract void deletar(Long id);
 
-  public T findById(Long id) {
-    T responseT = null;
-    return responseT;
-  }
+  public abstract List<T> listar();
+  
+  public abstract T buscarPorId(Long id);
   /**
    * Métodos.
    **/
-
 }
+  
+
+

@@ -2,35 +2,19 @@ package com.trybe.gestaotime.dao;
 
 import com.trybe.gestaotime.model.Torcedor;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class TorcedorDao extends GenericDao<Torcedor, Long> {
+public class TorcedorDao extends GenericDao<Torcedor, Integer> {
   /**
    * Metodo main.
    */
 
-  EntityManager em = emf.createEntityManager();
-
   /**
    * Metodo main.
    */
-
-  @Override
-  public void salvar(Torcedor s) {
-    /**
-     * Atributos.
-     * 
-     **/
-    EntityManager em = this.emf.createEntityManager();
-    em.getTransaction().begin();
-    em.persist(s);
-    em.getTransaction().commit();
-    em.close();
-  }
 
   @Override
   public List<Torcedor> listar() {
@@ -57,11 +41,9 @@ public class TorcedorDao extends GenericDao<Torcedor, Long> {
    */
 
   @Override
-  public Torcedor findById(Long id) {
-    EntityManager em = emf.createEntityManager();
-    Torcedor doc = em.find(Torcedor.class, id);
-    em.close();
-    return doc;
+  public Torcedor buscarPorId(Long id) {
+    return em.find(Torcedor.class, id);
+
   }
 
 }

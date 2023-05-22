@@ -1,6 +1,5 @@
 package com.trybe.gestaotime.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -40,12 +39,6 @@ public class Time {
    * Classe Time.
    **/
 
-  public Time() {
-    super();
-    this.jogadores = new ArrayList<Jogador>();
-    this.torcedores = new ArrayList<Torcedor>();
-  }
-
 
   public String getNome() {
     return nome;
@@ -59,33 +52,19 @@ public class Time {
    * Classe Time.
    **/
   public void setJogadores(List<Jogador> jogadores) {
-    this.jogadores.clear();
-    for (Jogador jogador : jogadores) {
-      this.addJogadores(jogador);
-    }
-  }
-
-  /**
-   * Classe Time.
-   **/
-  public void addJogadores(Jogador jogador) {
-    this.jogadores.add(jogador);
+    this.jogadores = jogadores;
   }
 
   /**
    * Classe Time.
    **/
   public void setTorcedores(List<Torcedor> torcedores) {
-
-    this.torcedores.addAll(torcedores);
+    this.torcedores = torcedores;
   }
 
   /**
    * Classe Time.
    **/
-  public void addTorcedores(Torcedor torcedor) {
-    this.torcedores.add(torcedor);
-  }
 
   public long getId() {
     return id;
